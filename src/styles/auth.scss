@@ -4,10 +4,10 @@
   height: 100vh;
 
   aside {
-    flex: 7;
+    flex: 6;
 
     background: #835afd;
-    color: #FFF;
+    color: #fff;
 
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
     }
 
     strong {
-      font: 700 36px 'Poppins', sans-serif;
+      font: 700 36px "Poppins", sans-serif;
       line-height: 42px;
       margin-top: 16px;
     }
@@ -58,7 +58,7 @@
     h2 {
       font-size: 24px;
       margin: 64px 0 24px;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     form {
@@ -66,15 +66,18 @@
         height: 50px;
         border-radius: 8px;
         padding: 0 16px;
-        background: #FFF;
+        background: #fff;
         border: 1px solid #a8a8b3;
+        font-family: "Roboto";
+        color: #a8a8b3;
       }
 
       button {
         margin-top: 16px;
       }
 
-      button, input {
+      button,
+      input {
         width: 100%;
       }
     }
@@ -93,17 +96,18 @@
   .create-room {
     margin-top: 64px;
     height: 50px;
-    border-radius: 8px;
     font-weight: 500;
-    background: #ea4335;
-    color: #FFF;
+    background: transparent;
+    color: #29292e;
+
+    border-radius: 8px;
+    border: 1px solid #a8a8b3;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     cursor: pointer;
-    border: 0;
 
     transition: filter 0.2s;
 
@@ -125,7 +129,7 @@
     align-items: center;
 
     &::before {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: #a8a8b3;
@@ -133,7 +137,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: #a8a8b3;
