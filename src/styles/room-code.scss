@@ -9,6 +9,16 @@
 
   display: flex;
 
+  transition: filter 0.2s;
+
+  &:hover {
+    border: 1px solid rgba(111, 75, 216, 0.9);
+
+    div {
+      filter: brightness(0.9);
+    }
+  }
+
   div {
     background-color: #835afd;
     padding: 0 12px;
