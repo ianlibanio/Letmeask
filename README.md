@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Letmeask" title="Logo" src="https://github.com/ianlibanio/Letmeask/blob/main/.github/logo.svg" width="500px" />
+    <img alt="Letmeask" title="Logo" src="https://raw.githubusercontent.com/ianlibanio/Letmeask/4d61357234bd93b80787d7f0fe92e795ca267119/.github/logo.svg" width="500px" />
 </h1>
 
 <h3 align="center">
@@ -19,6 +19,8 @@
     <img alt="Repository issues" src="https://img.shields.io/github/issues/ianlibanio/Letmeask?style=for-the-badge">
   </a>
 </p>
+
+<img alt="Letmeask banner" title="Banner" src="https://raw.githubusercontent.com/ianlibanio/Letmeask/4d61357234bd93b80787d7f0fe92e795ca267119/.github/banner.svg" >
 
 <p align="center">
   <a href="#-tecnologias">🚀 Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
