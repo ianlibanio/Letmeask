@@ -35,7 +35,14 @@ export function NewRoom() {
 
   return (
     <div id="page-auth">
-      <Helmet title="Letmeask - Crie salas de Q&amp;A ao-vivo" />
+      <Helmet title="Letmeask - Crie salas de Q&amp;A ao-vivo">
+        <link
+          rel="icon"
+          href={logoImg}
+          sizes="any"
+          type="image/svg+xml"
+        />
+      </Helmet>
       <aside>
         <img
           src={illustrationImg}

@@ -14,26 +14,29 @@ import { Helmet } from "react-helmet";
 import { database } from "../services/firebase";
 import { useAuth } from "../hooks/useAuth";
 
-type FirebaseQuestions = Record<string, {
-  author: {
-    name: string;
-    avatar: string;
+type FirebaseQuestions = Record<
+  string,
+  {
+    author: {
+      name: string;
+      avatar: string;
+    };
+    content: string;
+    isAnswered: boolean;
+    isHighlighted: boolean;
   }
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
-}>
+>;
 
 type Question = {
-  id: string,
+  id: string;
   author: {
     name: string;
     avatar: string;
-  }
+  };
   content: string;
   isAnswered: boolean;
   isHighlighted: boolean;
-}
+};
 
 type RoomParams = {
   id: string;
@@ -42,28 +45,30 @@ type RoomParams = {
 export function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
-  const [newQuestion, setNewQuestion] = useState('');
+  const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const roomId = params.id;
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
-    roomRef.on('value', room => {
+    roomRef.on("value", (room) => {
       const databaseRoom = room.val();
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isHighlighted: value.isHighlighted,
-          isAnswered: value.isAnswered,
+      const parsedQuestions = Object.entries(firebaseQuestions).map(
+        ([key, value]) => {
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isHighlighted: value.isHighlighted,
+            isAnswered: value.isAnswered,
+          };
         }
-      });
+      );
 
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
@@ -108,7 +113,14 @@ export function Room() {
 
   return (
     <div id="page-room">
-      <Helmet title={`Letmeask - Sala #${title}`} />
+      <Helmet title={`Letmeask - Sala #${title}`}>
+        <link
+          rel="icon"
+          href={logoImg}
+          sizes="any"
+          type="image/svg+xml"
+        />
+      </Helmet>
       <header>
         <div className="content">
           <Link to="/">
@@ -121,7 +133,7 @@ export function Room() {
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
-          { questions.length > 0 && <span>{questions.length} pergunta(s)</span> }
+          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
         <form onSubmit={handleSendQuestion}>
