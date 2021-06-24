@@ -1,3 +1,4 @@
+import { FormEvent, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import logoImg from "../assets/images/logo.svg";
@@ -6,10 +7,12 @@ import { RoomCode } from "../components/RoomCode";
 import { Button } from "../components/Button";
 
 import "../styles/room.scss";
-import { FormEvent, useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth";
+
 import toast from "react-hot-toast";
+import { GlobalHeader } from "../components/GlobalHeader";
+
 import { database } from "../services/firebase";
+import { useAuth } from "../hooks/useAuth";
 
 type FirebaseQuestions = Record<string, {
   author: {
@@ -105,6 +108,7 @@ export function Room() {
 
   return (
     <div id="page-room">
+      <GlobalHeader title={`Letmeask - Sala #${title}`} />
       <header>
         <div className="content">
           <Link to="/">

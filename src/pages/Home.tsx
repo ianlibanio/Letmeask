@@ -11,6 +11,8 @@ import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 
 import "../styles/auth.scss";
+
+import { GlobalHeader } from "../components/GlobalHeader";
 import toast from "react-hot-toast";
 
 export function Home() {
@@ -46,6 +48,7 @@ export function Home() {
 
   return (
     <div id="page-auth">
+      <GlobalHeader title="Letmeask - Crie salas de Q&amp;A ao-vivo" />
       <aside>
         <img
           src={illustrationImg}
@@ -58,17 +61,13 @@ export function Home() {
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
 
-
           <button
             onClick={() => {
-              toast.promise(
-                handleCreateRoom(),
-                 {
-                   loading: 'Efetuando login...',
-                   success: <b>Login efetuado com sucesso!</b>,
-                   error: <b>Erro ao efetuar o login.</b>,
-                 }
-               );
+              toast.promise(handleCreateRoom(), {
+                loading: "Efetuando login...",
+                success: <b>Login efetuado com sucesso!</b>,
+                error: <b>Erro ao efetuar o login.</b>,
+              });
             }}
             className="create-room"
           >
@@ -76,7 +75,6 @@ export function Home() {
             Crie sua sala com o Google
           </button>
 
-          
           <div className="separator">ou entre em uma sala</div>
           <form onSubmit={handleJoinRoom}>
             <input

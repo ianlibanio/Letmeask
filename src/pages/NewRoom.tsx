@@ -8,6 +8,8 @@ import { Button } from "../components/Button";
 import { database } from "../services/firebase";
 import { useAuth } from '../hooks/useAuth';
 
+import { GlobalHeader } from "../components/GlobalHeader";
+
 import "../styles/auth.scss";
 
 export function NewRoom() {
@@ -34,6 +36,7 @@ export function NewRoom() {
 
   return (
     <div id="page-auth">
+      <GlobalHeader title="Letmeask - Crie salas de Q&amp;A ao-vivo" />
       <aside>
         <img
           src={illustrationImg}
