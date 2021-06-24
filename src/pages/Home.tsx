@@ -12,7 +12,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import "../styles/auth.scss";
 
-import { GlobalHeader } from "../components/GlobalHeader";
+import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
 
 export function Home() {
@@ -48,7 +48,7 @@ export function Home() {
 
   return (
     <div id="page-auth">
-      <GlobalHeader title="Letmeask - Crie salas de Q&amp;A ao-vivo" />
+      <Helmet title="Letmeask - Crie salas de Q&amp;A ao-vivo" />
       <aside>
         <img
           src={illustrationImg}
