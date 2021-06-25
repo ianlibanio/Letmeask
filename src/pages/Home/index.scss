@@ -94,7 +94,6 @@
   }
 
   .create-room {
-    margin-top: 64px;
     height: 50px;
     font-weight: 500;
     background: transparent;
@@ -111,6 +110,10 @@
 
     transition: filter 0.2s;
 
+    &.top {
+      margin-top: 64px;
+    }
+
     img {
       margin-right: 8px;
     }
@@ -124,9 +127,16 @@
     font-size: 14px;
     color: #a8a8b3;
 
-    margin: 32px 0;
     display: flex;
     align-items: center;
+
+    &.auth {
+      margin: 4px 0;
+    }
+
+    &.join {
+      margin: 32px 0;
+    }
 
     &::before {
       content: "";

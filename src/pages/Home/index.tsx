@@ -2,10 +2,12 @@ import { useHistory } from "react-router-dom";
 import { FormEvent, useState } from "react";
 
 import logoImg from "../../assets/images/logo.svg";
-import googleIconImg from "../../assets/images/google-icon.svg";
 import illustrationImg from "../../assets/images/illustration.svg";
 
-import { database } from "../../services/firebase";
+import googleIconImg from "../../assets/images/google-icon.svg";
+import githubIconImg from "../../assets/images/github-icon.svg";
+
+import { firebase, database } from "../../services/firebase";
 
 import { Button } from "../../components/Button";
 import { useAuth } from "../../hooks/useAuth";
@@ -17,15 +19,19 @@ import toast from "react-hot-toast";
 
 export function Home() {
   const history = useHistory();
-  const { user, signInWithGoogle } = useAuth();
+  const { user, signIn } = useAuth();
   const [roomCode, setRoomCode] = useState("");
 
-  async function handleCreateRoom() {
+  async function handleCreateRoom(signInFunction: Promise<void>) {
     if (!user) {
-      await signInWithGoogle();
+      await signInFunction
+        .then(() => {
+          history.push("/rooms/new");
+        })
+        .catch(() => {});
+    } else {
+      history.push("/rooms/new");
     }
-
-    history.push("/rooms/new");
   }
 
   async function handleJoinRoom(event: FormEvent) {
@@ -70,20 +76,29 @@ export function Home() {
             <img src={logoImg} alt="Letmeask" />
 
             <button
-              onClick={() => {
-                toast.promise(handleCreateRoom(), {
-                  loading: "Efetuando login...",
-                  success: <b>Login efetuado com sucesso!</b>,
-                  error: <b>Erro ao efetuar o login.</b>,
-                });
-              }}
-              className="create-room"
+              onClick={() =>
+                handleCreateRoom(signIn(new firebase.auth.GoogleAuthProvider()))
+              }
+              className="create-room top"
             >
               <img src={googleIconImg} alt="Logo do Google" />
               Crie sua sala com o Google
             </button>
 
-            <div className="separator">ou entre em uma sala</div>
+            <div className="separator auth">ou</div>
+
+            <button
+              onClick={() =>
+                handleCreateRoom(signIn(new firebase.auth.GithubAuthProvider()))
+              }
+              className="create-room"
+            >
+              <img src={githubIconImg} alt="Logo do GitHub" />
+              Crie sua sala com o Github
+            </button>
+
+            <div className="separator join">ou entre em uma sala</div>
+
             <form onSubmit={handleJoinRoom}>
               <input
                 type="text"
