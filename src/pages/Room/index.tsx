@@ -1,5 +1,5 @@
-import { FormEvent, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { FormEvent, useEffect, useState } from "react";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 import logoImg from "../../assets/images/logo.svg";
 
@@ -22,12 +22,23 @@ type RoomParams = {
 };
 
 export function Room() {
-  const { user } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
+
   const [newQuestion, setNewQuestion] = useState("");
+
   const params = useParams<RoomParams>();
   const roomId = params.id;
 
-  const { title, questions } = useRoom(roomId);
+  const history = useHistory();
+  const { title, questions, ended } = useRoom(roomId);
+
+  useEffect(() => {
+    if (ended) {
+      history.push("/");
+
+      toast.success("Esta sala foi encerrada!");
+    }
+  }, [ended, history]);
 
   async function pushQuestion(question: {}) {
     await database.ref(`rooms/${roomId}/questions`).push(question);
@@ -65,7 +76,10 @@ export function Room() {
     setNewQuestion("");
   }
 
-  async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
+  async function handleLikeQuestion(
+    questionId: string,
+    likeId: string | undefined
+  ) {
     if (likeId) {
       await database
         .ref(`rooms/${roomId}/questions/${questionId}/likes/${likeId}`)
@@ -115,7 +129,21 @@ export function Room() {
                 </div>
               ) : (
                 <span>
-                  Para enviar uma pergunta, <button>faça seu login</button>.
+                  Para enviar uma pergunta,{" "}
+                  <button
+                    onClick={async (event) => {
+                      event.preventDefault();
+
+                      toast.promise(signInWithGoogle(), {
+                        loading: "Efetuando login...",
+                        success: <b>Login efetuado com sucesso!</b>,
+                        error: <b>Erro ao efetuar o login.</b>,
+                      });
+                    }}
+                  >
+                    faça seu login
+                  </button>
+                  .
                 </span>
               )}
               <Button type="submit" disabled={!user}>

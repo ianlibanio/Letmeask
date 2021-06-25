@@ -28,10 +28,11 @@ export function AdminRoom() {
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
-      endedAt: new Date()
+      endedAt: new Date(),
     });
 
-    history.push('/');
+    history.push("/");
+    toast.success("Esta sala foi encerrada!");
   }
 
   async function handleDeleteQuestion(questionId: string) {
@@ -61,7 +62,9 @@ export function AdminRoom() {
             </Link>
             <div>
               <RoomCode code={roomId} />
-              <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+              <Button isOutlined onClick={handleEndRoom}>
+                Encerrar sala
+              </Button>
             </div>
           </div>
         </header>
