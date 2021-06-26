@@ -6,21 +6,21 @@
   💬 Letmeask
 </h3>
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ianlibanio/Letmeask?style=for-the-badge">
+<img alt="Letmeask banner" title="Banner" src="https://raw.githubusercontent.com/ianlibanio/Letmeask/4d61357234bd93b80787d7f0fe92e795ca267119/.github/banner.svg" >
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ianlibanio/Letmeask?style=for-the-badge">
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ianlibanio/Letmeask?color=835afd&style=for-the-badge">
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ianlibanio/Letmeask?color=835afd&style=for-the-badge">
   
   <a href="https://github.com/ianlibanio/Letmeask/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ianlibanio/Letmeask?style=for-the-badge">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ianlibanio/Letmeask?color=835afd&style=for-the-badge">
   </a>
 
   <a href="https://github.com/ianlibanio/Letmeask/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/ianlibanio/Letmeask?style=for-the-badge">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/ianlibanio/Letmeask?color=835afd&style=for-the-badge">
   </a>
 </p>
-
-<img alt="Letmeask banner" title="Banner" src="https://raw.githubusercontent.com/ianlibanio/Letmeask/4d61357234bd93b80787d7f0fe92e795ca267119/.github/banner.svg" >
 
 <p align="center">
   <a href="#-tecnologias">🚀 Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
