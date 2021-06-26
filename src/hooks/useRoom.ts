@@ -63,10 +63,10 @@ export function useRoom(roomId: string) {
             )?.[0],
           };
         })
-        .sort((a, b) => {
-          return b.likeCount - a.likeCount;
-        });
-
+        .sort((x, y) => Number(y.isAnswered) - Number(x.isAnswered))
+        .sort((x, y) => y.likeCount - x.likeCount)
+        .sort((x, y) => Number(y.isHighlighted) - Number(x.isHighlighted));
+        
       setTitle(databaseRoom.title);
       setOwner(databaseRoom.authorId);
 

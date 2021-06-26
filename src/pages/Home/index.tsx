@@ -40,7 +40,7 @@ export function Home() {
   async function handleJoinRoom(event: FormEvent) {
     event.preventDefault();
 
-    if (roomCode.trim() === "") {
+    if (roomCode.trim() === "" || roomCode.match(/[.$[\]#/]/)) {
       toast.error("Código inválido.");
       return;
     }

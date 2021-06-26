@@ -17,7 +17,6 @@ function App() {
           style: {
             background: "#fff",
             border: "1px solid #835AFD",
-            padding: "24px 48px",
             color: "#835AFD",
           },
           iconTheme: {
