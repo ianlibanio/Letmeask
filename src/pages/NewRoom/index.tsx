@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import illustrationImg from "../../assets/images/illustration.svg";
@@ -10,11 +10,20 @@ import { useAuth } from "../../hooks/useAuth";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import "../../styles/room.scss";
+import toast from "react-hot-toast";
 
 export function NewRoom() {
   const { user } = useAuth();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState("");
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/");
+
+      toast.error("Você deve entrar em sua conta antes de criar uma sala.");
+    }
+  }, [user, history]);
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();

@@ -17,19 +17,22 @@ import "./index.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast from "react-hot-toast";
 
+type User = {
+  id: string;
+  name: string;
+  avatar: string;
+  provider?: string;
+};
+
 export function Home() {
   const history = useHistory();
-  const { user, signIn } = useAuth();
+  const { signIn } = useAuth();
   const [roomCode, setRoomCode] = useState("");
 
-  async function handleCreateRoom(signInFunction: Promise<void>) {
-    if (!user) {
-      await signInFunction
-        .then(() => {
-          history.push("/rooms/new");
-        })
-        .catch(() => {});
-    } else {
+  async function handleCreateRoom(signInFunction: Promise<User | undefined>) {
+    const user = await signInFunction;
+
+    if (user !== undefined) {
       history.push("/rooms/new");
     }
   }

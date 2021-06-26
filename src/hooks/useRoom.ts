@@ -40,6 +40,8 @@ export function useRoom(roomId: string) {
   const [title, setTitle] = useState("");
   const [ended, setEnded] = useState(false);
 
+  const [owner, setOwner] = useState("");
+
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
@@ -66,15 +68,15 @@ export function useRoom(roomId: string) {
         });
 
       setTitle(databaseRoom.title);
-      setQuestions(parsedQuestions);
+      setOwner(databaseRoom.authorId);
 
+      setQuestions(parsedQuestions);
       setEnded(databaseRoom.endedAt !== undefined);
     });
-
     return () => {
       roomRef.off("value");
     };
   }, [roomId, user?.id]);
 
-  return { questions, title, ended };
+  return { questions, title, ended, owner };
 }
