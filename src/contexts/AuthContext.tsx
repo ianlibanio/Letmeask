@@ -104,9 +104,7 @@ export function AuthContextProvider({ ...props }: AuthContextProviderProps) {
   }
 
   if (loading) {
-    return (
-      <></>
-    );
+    return <></>;
   }
 
   return (
