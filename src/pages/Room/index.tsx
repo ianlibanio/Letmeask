@@ -1,12 +1,17 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 
+import Modal from "react-modal";
+
 import logoImg from "../../assets/images/logo.svg";
+import googleIconImg from "../../assets/images/google-icon.svg";
+import githubIconImg from "../../assets/images/github-icon.svg";
 
 import { RoomCode } from "../../components/RoomCode";
 import { Button } from "../../components/Button";
 
 import "../../styles/room.scss";
+import "./modal.scss";
 
 import toast from "react-hot-toast";
 
@@ -14,7 +19,7 @@ import { RoomLoader } from "../../components/RoomLoader";
 import { Question } from "../../components/Question";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-import { database } from "../../services/firebase";
+import { database, firebase } from "../../services/firebase";
 import { useAuth } from "../../hooks/useAuth";
 import { useRoom } from "../../hooks/useRoom";
 
@@ -23,15 +28,19 @@ type RoomParams = {
 };
 
 export function Room() {
-  const { user } = useAuth();
+  const { user, signIn } = useAuth();
 
   const [newQuestion, setNewQuestion] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const params = useParams<RoomParams>();
   const roomId = params.id;
 
   const history = useHistory();
+
   const { title, questions, ended, owner } = useRoom(roomId);
+
+  Modal.setAppElement("#root");
 
   useEffect(() => {
     if (ended) {
@@ -92,6 +101,14 @@ export function Room() {
     }
   }
 
+  async function handleLogin(signInProvider: firebase.auth.AuthProvider) {
+    const user = await signIn(signInProvider);
+
+    if (user !== undefined) {
+      setShowModal(false);
+    }
+  }
+
   return (
     <HelmetProvider>
       <div id="page-room">
@@ -132,20 +149,70 @@ export function Room() {
                     <span>{user.name}</span>
                   </div>
                 ) : (
-                  <span>
-                    Para enviar uma pergunta,{" "}
-                    <button
-                      onClick={async (event) => {
-                        event.preventDefault();
+                  <>
+                    <span>
+                      Para enviar uma pergunta,{" "}
+                      <button
+                        onClick={async (event) => {
+                          event.preventDefault();
 
-                        // modal to choose login option
-                        history.push("/");
+                          setShowModal(true);
+                        }}
+                      >
+                        faça seu login
+                      </button>
+                      .
+                    </span>
+                    <Modal
+                      isOpen={showModal}
+                      contentLabel={"Escolher opção de login."}
+                      onRequestClose={() => {
+                        setShowModal(false);
+                      }}
+                      style={{
+                        content: {
+                          top: "50%",
+                          left: "50%",
+                          right: "auto",
+                          bottom: "auto",
+                          padding: "80px 224px",
+                          marginRight: "-50%",
+                          transform: "translate(-50%, -50%)",
+                          borderRadius: "12px",
+                        },
+                        overlay: {
+                          backgroundColor: "rgba(5,2,6,0.8)",
+                        },
                       }}
                     >
-                      faça seu login
-                    </button>
-                    .
-                  </span>
+                      <div className="modal-content">
+                        <img src={logoImg} alt="Letmeask" />
+                        <p>Escolha uma opção para fazer login:</p>
+
+                        <button
+                          onClick={() =>
+                            handleLogin(new firebase.auth.GoogleAuthProvider())
+                          }
+                          className="auth-button top"
+                        >
+                          <img src={googleIconImg} alt="Logo do Google" />
+                          Faça login com Google
+                        </button>
+
+                        <div className="separator">ou</div>
+
+                        <button
+                          onClick={() =>
+                            handleLogin(new firebase.auth.GithubAuthProvider())
+                          }
+                          className="auth-button"
+                        >
+                          <img src={githubIconImg} alt="Logo do GitHub" />
+                          Faça login com Github
+                        </button>
+                      </div>
+                    </Modal>
+                  </>
                 )}
                 <Button type="submit" disabled={!user}>
                   Enviar pergunta

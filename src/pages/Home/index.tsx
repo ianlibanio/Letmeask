@@ -17,20 +17,13 @@ import "./index.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast from "react-hot-toast";
 
-type User = {
-  id: string;
-  name: string;
-  avatar: string;
-  provider?: string;
-};
-
 export function Home() {
   const history = useHistory();
   const { signIn } = useAuth();
   const [roomCode, setRoomCode] = useState("");
 
-  async function handleCreateRoom(signInFunction: Promise<User | undefined>) {
-    const user = await signInFunction;
+  async function handleCreateRoom(signInProvider: firebase.auth.AuthProvider) {
+    const user = await signIn(signInProvider);
 
     if (user !== undefined) {
       history.push("/rooms/new");
@@ -80,7 +73,7 @@ export function Home() {
 
             <button
               onClick={() =>
-                handleCreateRoom(signIn(new firebase.auth.GoogleAuthProvider()))
+                handleCreateRoom(new firebase.auth.GoogleAuthProvider())
               }
               className="create-room top"
             >
@@ -92,7 +85,7 @@ export function Home() {
 
             <button
               onClick={() =>
-                handleCreateRoom(signIn(new firebase.auth.GithubAuthProvider()))
+                handleCreateRoom(new firebase.auth.GithubAuthProvider())
               }
               className="create-room"
             >

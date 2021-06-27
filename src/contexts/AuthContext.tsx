@@ -86,6 +86,7 @@ export function AuthContextProvider({ ...props }: AuthContextProviderProps) {
         };
 
         setUser(newUser);
+        toast.success("Você fez login com sucesso!");
         return newUser;
       }
     } catch (e) {
