@@ -79,8 +79,13 @@ export function AdminRoom() {
   }
 
   async function handleHighlightQuestion(questionId: string) {
-    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
-      isHighlighted: true,
+    const databaseRef = await database.ref(
+      `rooms/${roomId}/questions/${questionId}`
+    );
+    const questionRef = await databaseRef.get();
+
+    await databaseRef.update({
+      isHighlighted: !questionRef.val().isHighlighted,
     });
   }
 
@@ -142,6 +147,7 @@ export function AdminRoom() {
                             alt="Marcar pergunta como respondida"
                           />
                         </button>
+
                         <button
                           type="button"
                           onClick={() => {
