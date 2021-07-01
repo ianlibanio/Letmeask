@@ -47,7 +47,7 @@ Letmeask é um projeto desenvolvido durante a Next Level Week 6, organizado pela
 - Faça um fork deste repositório;
 - Crie uma branch com a sua feature: `git checkout -b feature`;
 - Faça commit das suas alterações: `git commit -m 'feat: Nova feature'`;
-- Faça push para a sua branch: `git push origin feature`.
+- Faça o push para o repositório: `git push origin feature`.
 
 Após ser realizado o merge de seu pull request, você pode deletar sua branch.
 
